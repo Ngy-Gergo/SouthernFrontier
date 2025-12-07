@@ -16,8 +16,8 @@ MonoBehaviour:
   description: This provides your castle with precios underground materials
   productionOptions:
   - output: 0
-    basePerTurn: 10
-    perLevel: 5
+    basePerTurn: 1
+    perLevel: 1
   levelVisualPrefabs: []
   levelUpCosts:
   - cost:

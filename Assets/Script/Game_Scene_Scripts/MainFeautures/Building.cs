@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
-    [SerializeField] private BuildingDefinition definition;
-    [SerializeField] private ResourceRecipesDB recipesDb;
-    [SerializeField] private Transform visualRoot;
+    [SerializeField] private BuildingDefinition definition;   // Static data (name, options, costs, visuals)
+    [SerializeField] private ResourceRecipesDB recipesDb;     // Optional input->output rules for crafted resources
+    [SerializeField] private Transform visualRoot;            // Where the level model gets spawned
 
-    [SerializeField, Min(0)] private int level = 0;
-    [SerializeField] private int selectedOptionIndex = 0;
+    [SerializeField, Min(0)] private int level = 0;           // Current building level
+    [SerializeField] private int selectedOptionIndex = 0;     // Which production option is active
 
-    [SerializeField] private string id; // for save
+    [SerializeField] private string id;                       // Stable id for save/load
 
-    private GameObject _currentVisual;
+    private GameObject _currentVisual;                        // Spawned model for the current level
 
     public string Id => id;
     public int Level => level;
@@ -21,6 +21,7 @@ public class Building : MonoBehaviour
 
     private void OnEnable()
     {
+        // Produce once per turn.
         TurnManager.OnNextTurn += OnTurn;
         ApplyVisual();
     }
@@ -33,6 +34,7 @@ public class Building : MonoBehaviour
     [ContextMenu("Generate Id")]
     private void GenerateId()
     {
+        // One-time id for saving.
         id = Guid.NewGuid().ToString();
     }
 
@@ -43,6 +45,7 @@ public class Building : MonoBehaviour
 
     public ProductionOption GetSelectedOption()
     {
+        // Clamp to valid range and return the active option.
         if (definition == null || definition.productionOptions.Count == 0) return null;
         selectedOptionIndex = Mathf.Clamp(selectedOptionIndex, 0, definition.productionOptions.Count - 1);
         return definition.productionOptions[selectedOptionIndex];
@@ -50,12 +53,14 @@ public class Building : MonoBehaviour
 
     public void SelectOption(int index)
     {
+        // Called by UI when the player switches output type.
         if (definition == null || definition.productionOptions.Count == 0) return;
         selectedOptionIndex = Mathf.Clamp(index, 0, definition.productionOptions.Count - 1);
     }
 
     private void OnTurn()
     {
+        // Add resources to the stockpile when a turn ends.
         var opt = GetSelectedOption();
         if (opt == null) return;
 
@@ -65,15 +70,17 @@ public class Building : MonoBehaviour
 
     public bool CanLevelUp()
     {
+        // Level-up costs are stored per step (level -> level+1).
         if (definition == null) return false;
         return level < definition.levelUpCosts.Count;
     }
 
     public bool TryLevelUp()
     {
+        // Spend resources and upgrade if possible.
         if (!CanLevelUp()) return false;
 
-        var cost = definition.levelUpCosts[level].cost; // cost to go level -> level+1
+        var cost = definition.levelUpCosts[level].cost;
         if (Stockpile.Instance == null) return false;
 
         if (!Stockpile.Instance.Spend(cost)) return false;
@@ -85,12 +92,14 @@ public class Building : MonoBehaviour
 
     public void SetLevel(int newLevel)
     {
+        // Used by save/load or debug.
         level = Mathf.Max(0, newLevel);
         ApplyVisual();
     }
 
     public void ApplySave(int savedLevel, int savedOptionIndex)
     {
+        // Restore state from save.
         level = Mathf.Max(0, savedLevel);
         SelectOption(savedOptionIndex);
         ApplyVisual();
@@ -98,6 +107,7 @@ public class Building : MonoBehaviour
 
     private void ApplyVisual()
     {
+        // Swap the level model.
         if (_currentVisual != null) Destroy(_currentVisual);
 
         if (definition == null || definition.levelVisualPrefabs == null || definition.levelVisualPrefabs.Count == 0)
@@ -109,6 +119,8 @@ public class Building : MonoBehaviour
 
         var parent = visualRoot != null ? visualRoot : transform;
         _currentVisual = Instantiate(prefab, parent);
+
+        // Keep the prefab aligned under the root.
         _currentVisual.transform.localPosition = Vector3.zero;
         _currentVisual.transform.localRotation = Quaternion.identity;
         _currentVisual.transform.localScale = Vector3.one;

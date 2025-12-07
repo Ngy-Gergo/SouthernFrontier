@@ -5,29 +5,27 @@ using UnityEngine;
 [Serializable]
 public class ProductionOption
 {
-    public ResourceType output;
-    public int basePerTurn = 5;
-    public int perLevel = 1;
+    public ResourceType output;   // What resource this option produces
+    public int basePerTurn = 5;   // Produced at level 0
+    public int perLevel = 1;      // Extra per building level
 }
 
 [Serializable]
 public class LevelUpCost
 {
-    // Cost to go from level N -> N+1 (index = N)
-    public List<ResourceAmount> cost = new();
+    // Cost for going from level N -> N+1 (index = N).
+    public List<ResourceAmount> cost = new List<ResourceAmount>();
 }
 
 [CreateAssetMenu(menuName = "Game/Building Definition")]
 public class BuildingDefinition : ScriptableObject
 {
-    public string displayName = "Building";
-    [TextArea] public string description;
+    public string displayName = "Building"; // Shown in UI
+    [TextArea] public string description;   // Shown in UI
 
-    public List<ProductionOption> productionOptions = new();
+    public List<ProductionOption> productionOptions = new List<ProductionOption>(); // What it can produce
 
-    // Optional visuals per level (index = level, clamped)
-    public List<GameObject> levelVisualPrefabs = new();
+    public List<GameObject> levelVisualPrefabs = new List<GameObject>(); // Model per level (optional)
 
-    // Cost list: costs[0] = level 0->1, costs[1] = 1->2, ...
-    public List<LevelUpCost> levelUpCosts = new();
+    public List<LevelUpCost> levelUpCosts = new List<LevelUpCost>(); // Upgrade costs per step
 }

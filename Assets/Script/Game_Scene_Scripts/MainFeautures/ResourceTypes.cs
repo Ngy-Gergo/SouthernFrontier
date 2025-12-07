@@ -9,6 +9,6 @@ public enum ResourceType
 [Serializable]
 public struct ResourceAmount
 {
-    public ResourceType type;
-    public int amount;
+    public ResourceType type; // Which resource
+    public int amount;        // How much
 }

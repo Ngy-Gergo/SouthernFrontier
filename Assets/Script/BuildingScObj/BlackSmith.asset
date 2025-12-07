@@ -17,13 +17,29 @@ MonoBehaviour:
     solders
   productionOptions:
   - output: 3
-    basePerTurn: 2
+    basePerTurn: 1
     perLevel: 1
   - output: 7
-    basePerTurn: 4
+    basePerTurn: 1
     perLevel: 1
-  levelVisualPrefabs: []
+  levelVisualPrefabs:
+  - {fileID: 919132149155446097, guid: a687b3b3645b35249a039eed800b4b7d, type: 3}
+  - {fileID: 919132149155446097, guid: bf0dc1f766ef1174c9d7414cbeaed9db, type: 3}
+  - {fileID: 919132149155446097, guid: 15bcb3e504b0b18469f4ea1f6d3ca200, type: 3}
+  - {fileID: 919132149155446097, guid: cc067c81d51aa0e47bce2a667d9cf83b, type: 3}
   levelUpCosts:
   - cost:
     - type: 0
-      amount: 0
+      amount: 10
+  - cost:
+    - type: 0
+      amount: 20
+    - type: 1
+      amount: 5
+  - cost:
+    - type: 0
+      amount: 45
+    - type: 3
+      amount: 5
+    - type: 1
+      amount: 10
