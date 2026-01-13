@@ -8,7 +8,12 @@ public class TurnManager : MonoBehaviour
 
     public int turn = 1; // Current turn number
 
-    private void Awake() => Instance = this; // Set singleton ref
+    private void Awake()
+    {
+        // Singleton setup (prevents duplicates overriding Instance).
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+    }
 
     public void NextTurn()
     {

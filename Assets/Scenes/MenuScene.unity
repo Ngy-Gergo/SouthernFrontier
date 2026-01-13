@@ -152,7 +152,7 @@ RectTransform:
   m_Father: {fileID: 1548593345}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -211,7 +211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &104686473
 RectTransform:
   m_ObjectHideFlags: 0
@@ -229,6 +229,7 @@ RectTransform:
   - {fileID: 169838237}
   - {fileID: 127775273}
   - {fileID: 1061863798}
+  - {fileID: 1050019520}
   m_Father: {fileID: 1922450889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -326,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Set_Resolution_Script
   resolutionDropdown: {fileID: 0}
-  ScreenModeToggle: {fileID: 0}
+  screenModeToggle: {fileID: 0}
 --- !u!114 &127775275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,7 +788,6 @@ GameObject:
   - component: {fileID: 340667200}
   - component: {fileID: 340667199}
   - component: {fileID: 340667198}
-  - component: {fileID: 340667201}
   m_Layer: 5
   m_Name: New Game
   m_TagString: Untagged
@@ -859,9 +859,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 340667201}
-        m_TargetAssemblyTypeName: New_Game_Script, Assembly-CSharp
-        m_MethodName: New_Game
+      - m_Target: {fileID: 1520731977}
+        m_TargetAssemblyTypeName: MainMenuUI, GameRunTime
+        m_MethodName: NewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -909,53 +909,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340667196}
   m_CullTransparentMesh: 1
---- !u!114 &340667201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340667196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7355db7085989e4f8efbe273f9e01a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::New_Game_Script
---- !u!1 &363295279
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 363295280}
-  m_Layer: 5
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &363295280
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363295279}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1922450889}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &383251579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,8 +1266,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1520731977}
-        m_TargetAssemblyTypeName: TogglePanel_Script, Assembly-CSharp
-        m_MethodName: Open_Close_Panel
+        m_TargetAssemblyTypeName: MainMenuUI, GameRunTime
+        m_MethodName: OpenSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1362,6 +1315,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 432313387}
   m_CullTransparentMesh: 1
+--- !u!1 &484559253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 484559255}
+  - component: {fileID: 484559254}
+  m_Layer: 0
+  m_Name: FPSLIMIT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &484559254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484559253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d235584917e09841a7db4244fb4f221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameRunTime::FrameLimiter
+  targetFps: 60
+--- !u!4 &484559255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484559253}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &527846545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,7 +1516,6 @@ GameObject:
   - component: {fileID: 838717171}
   - component: {fileID: 838717170}
   - component: {fileID: 838717169}
-  - component: {fileID: 838717168}
   m_Layer: 5
   m_Name: Resolution
   m_TagString: Untagged
@@ -1548,20 +1545,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.0000038147, y: 100.2}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &838717168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838717166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b1486a8b601114090050b97d4e29ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Set_Resolution_Script
-  resolutionDropdown: {fileID: 0}
-  ScreenModeToggle: {fileID: 0}
 --- !u!114 &838717169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1621,19 +1604,7 @@ MonoBehaviour:
       m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 838717168}
-        m_TargetAssemblyTypeName: Set_Resolution_Script, Assembly-CSharp
-        m_MethodName: SetResolution
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &838717170
 MonoBehaviour:
@@ -2329,9 +2300,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1520731977}
-        m_TargetAssemblyTypeName: TogglePanel_Script, Assembly-CSharp
-        m_MethodName: Open_Close_Panel
+      - m_Target: {fileID: 1050019518}
+        m_TargetAssemblyTypeName: OptionsPanelUI, GameRunTime
+        m_MethodName: Hide
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2379,6 +2350,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028907418}
   m_CullTransparentMesh: 1
+--- !u!1 &1050019517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1050019520}
+  - component: {fileID: 1050019518}
+  - component: {fileID: 1050019519}
+  m_Layer: 5
+  m_Name: SettingsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1050019518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050019517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5767ced99c40cf469c527c697c36cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameRunTime::OptionsPanelUI
+  panelRoot: {fileID: 104686472}
+  closeButton: {fileID: 1028907420}
+--- !u!114 &1050019519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050019517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04b1486a8b601114090050b97d4e29ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameRunTime::Set_Resolution_Script
+  resolutionDropdown: {fileID: 838717169}
+  screenModeToggle: {fileID: 127775275}
+--- !u!224 &1050019520
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050019517}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 104686473}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1061863797
 GameObject:
   m_ObjectHideFlags: 0
@@ -2391,7 +2427,6 @@ GameObject:
   - component: {fileID: 1061863802}
   - component: {fileID: 1061863801}
   - component: {fileID: 1061863800}
-  - component: {fileID: 1061863803}
   m_Layer: 5
   m_Name: Apply
   m_TagString: Untagged
@@ -2463,8 +2498,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1061863803}
-        m_TargetAssemblyTypeName: Set_Resolution_Script, Assembly-CSharp
+      - m_Target: {fileID: 1050019519}
+        m_TargetAssemblyTypeName: Set_Resolution_Script, GameRunTime
         m_MethodName: Apply
         m_Mode: 1
         m_Arguments:
@@ -2513,20 +2548,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061863797}
   m_CullTransparentMesh: 1
---- !u!114 &1061863803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1061863797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04b1486a8b601114090050b97d4e29ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Set_Resolution_Script
-  resolutionDropdown: {fileID: 838717169}
-  ScreenModeToggle: {fileID: 127775275}
 --- !u!1 &1081127930
 GameObject:
   m_ObjectHideFlags: 0
@@ -2890,8 +2911,6 @@ GameObject:
   - component: {fileID: 1239586377}
   - component: {fileID: 1239586376}
   - component: {fileID: 1239586375}
-  - component: {fileID: 1239586378}
-  - component: {fileID: 1239586379}
   m_Layer: 5
   m_Name: Load Game
   m_TagString: Untagged
@@ -2963,9 +2982,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1239586378}
-        m_TargetAssemblyTypeName: Save_Load_Game, Assembly-CSharp
-        m_MethodName: Load
+      - m_Target: {fileID: 1520731977}
+        m_TargetAssemblyTypeName: MainMenuUI, GameRunTime
+        m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3013,31 +3032,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1239586373}
   m_CullTransparentMesh: 1
---- !u!114 &1239586378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239586373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22cb106df85299f4f860ffd4026aaba2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Save_Load_Game
-  turnManager: {fileID: 0}
---- !u!114 &1239586379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239586373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7355db7085989e4f8efbe273f9e01a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::New_Game_Script
 --- !u!1 &1470582228
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,6 +3077,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1520731976}
+  - component: {fileID: 1520731978}
   - component: {fileID: 1520731977}
   m_Layer: 5
   m_Name: UIManager
@@ -3119,10 +3114,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1520731975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16b68c7c0e4ef944fb2864fc97f6a5fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 79c09e387b9ccae48a6931ce178fddac, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TogglePanel_Script
-  Panel: {fileID: 104686472}
+  m_EditorClassIdentifier: GameRunTime::MainMenuUI
+  newGameButton: {fileID: 340667198}
+  loadGameButton: {fileID: 1239586375}
+  settingsButton: {fileID: 432313389}
+  exitButton: {fileID: 1783717190}
+  optionsPanel: {fileID: 1050019518}
+--- !u!114 &1520731978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520731975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22cb106df85299f4f860ffd4026aaba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameRunTime::Save_Load_Game
 --- !u!1 &1548593344
 GameObject:
   m_ObjectHideFlags: 0
@@ -3325,7 +3336,6 @@ GameObject:
   - component: {fileID: 1783717192}
   - component: {fileID: 1783717191}
   - component: {fileID: 1783717190}
-  - component: {fileID: 1783717193}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -3397,9 +3407,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1783717193}
-        m_TargetAssemblyTypeName: Exit_Game_Script, Assembly-CSharp
-        m_MethodName: Exit_Game
+      - m_Target: {fileID: 1520731977}
+        m_TargetAssemblyTypeName: MainMenuUI, GameRunTime
+        m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3447,18 +3457,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783717188}
   m_CullTransparentMesh: 1
---- !u!114 &1783717193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1783717188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5a0e54d0bd46049aa0322b28c003e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Exit_Game_Script
 --- !u!1 &1882500488
 GameObject:
   m_ObjectHideFlags: 0
@@ -3694,7 +3692,6 @@ RectTransform:
   - {fileID: 1239586374}
   - {fileID: 432313388}
   - {fileID: 1783717189}
-  - {fileID: 363295280}
   - {fileID: 104686473}
   - {fileID: 1520731976}
   m_Father: {fileID: 0}
@@ -3873,7 +3870,7 @@ RectTransform:
   m_Father: {fileID: 527846546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4381,3 +4378,4 @@ SceneRoots:
   - {fileID: 1922450889}
   - {fileID: 1743739223}
   - {fileID: 383251583}
+  - {fileID: 484559255}

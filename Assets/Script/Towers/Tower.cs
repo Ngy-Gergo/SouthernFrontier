@@ -1,14 +1,45 @@
+using System;
 using UnityEngine;
-
 public class Tower : MonoBehaviour
 {
+    // Simple global list so we don't FindObjectsOfType every wave.
+    public static readonly System.Collections.Generic.List<Tower> All = new System.Collections.Generic.List<Tower>();
+    public static event System.Action OnAnyTowerChanged;
+
     [SerializeField] private TowerDefinition def;  // Tower levels, costs, visuals
     [SerializeField] private Transform visualRoot; // Where the model spawns
     [SerializeField] private int level = 0;        // Current tower level
-
+    [SerializeField] private string id; // Stable id for save/load
+    public string Id => id;
     private GameObject _visual; // Current spawned model
 
     public int Level => level;
+
+    private void OnEnable()
+    {
+        // Register for fast lookup.
+        if (!All.Contains(this)) All.Add(this);
+        OnAnyTowerChanged?.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        // Unregister.
+        All.Remove(this);
+        OnAnyTowerChanged?.Invoke();
+    }
+    private void OnValidate()
+    {
+        // Generate once in editor so it persists in scene/prefab.
+        if (!Application.isPlaying && string.IsNullOrWhiteSpace(id))
+            id = Guid.NewGuid().ToString();
+    }
+
+    public void SetLevel(int newLevel)
+    {
+        level = Mathf.Max(0, newLevel);
+        ApplyVisual();
+    }
 
     private void Start() => ApplyVisual(); // Spawn the starting model
 
@@ -37,9 +68,10 @@ public class Tower : MonoBehaviour
         var cost = def.levels[next].upgradeCost;
 
         if (!Stockpile.Instance.Spend(cost)) return false;
-
+        
         level = next;
         ApplyVisual();
+        OnAnyTowerChanged?.Invoke();
         return true;
     }
 

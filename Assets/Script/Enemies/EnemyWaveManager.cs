@@ -8,19 +8,25 @@ public class EnemyWaveManager : MonoBehaviour
     public event Action<int> OnWaveWon;               // Fired after winning: (waveIndex)
     public event Action OnGameLost;                   // Fired once on defeat
     public event Action OnGameWon;                    // Fired once after last wave
+    public EnemyWavesDefinition WavesDef => wavesDef; // Expose for UI
 
     [SerializeField] private EnemyWavesDefinition wavesDef; // Wave schedule + loot
-    [SerializeField] private TroopStatsDB troopStats;       // Troop defense values
+    [SerializeField] private TroopDefinitionsDB troopDefs;  // Troop defense values (from TroopDefinition)
 
-    [Header("Optional end panels")]
-    [SerializeField] private GameObject defeatPanel;  // Shown on loss
-    [SerializeField] private GameObject victoryPanel; // Shown after final win
-
-    private int _waveIndex = 0; // Current wave pointer
+    private int _waveIndex = 0;  // Current wave pointer
     private bool _ended = false; // Stops further processing after game end
+
+    public int WaveIndex => _waveIndex;
+    public bool Ended => _ended;
 
     private void OnEnable() => TurnManager.OnNextTurn += HandleTurn; // Listen for turns
     private void OnDisable() => TurnManager.OnNextTurn -= HandleTurn;
+
+    private void Start()
+    {
+        // Handle “turn 1” UI immediately (warnings/arrival).
+        HandleTurn();
+    }
 
     private void HandleTurn()
     {
@@ -50,7 +56,7 @@ public class EnemyWaveManager : MonoBehaviour
 
         // Player defense comes from towers + troops.
         int towerDefense = SumTowerDefense();
-        int troopDefense = (TroopBank.Instance != null) ? TroopBank.Instance.GetTotalDefense(troopStats) : 0;
+        int troopDefense = (TroopBank.Instance != null) ? TroopBank.Instance.GetTotalDefense(troopDefs) : 0;
         int playerDefense = towerDefense + troopDefense;
 
         // Lose if we can't match their power.
@@ -77,11 +83,11 @@ public class EnemyWaveManager : MonoBehaviour
 
     private int SumTowerDefense()
     {
-        // Sum defense from every tower in the scene.
+        // Sum defense from every tower in the scene (fast: no FindObjectsOfType).
         int sum = 0;
-        var towers = FindObjectsOfType<Tower>();
-        for (int i = 0; i < towers.Length; i++)
-            sum += towers[i].GetDefense();
+        for (int i = 0; i < Tower.All.Count; i++)
+            if (Tower.All[i] != null)
+                sum += Tower.All[i].GetDefense();
         return sum;
     }
 
@@ -89,8 +95,6 @@ public class EnemyWaveManager : MonoBehaviour
     {
         // End the game once.
         _ended = true;
-
-        if (defeatPanel != null) defeatPanel.SetActive(true);
         OnGameLost?.Invoke();
     }
 
@@ -98,8 +102,12 @@ public class EnemyWaveManager : MonoBehaviour
     {
         // End the game once.
         _ended = true;
-
-        if (victoryPanel != null) victoryPanel.SetActive(true);
         OnGameWon?.Invoke();
+    }
+
+    public void ApplySave(int waveIndex)
+    {
+        // Restore which wave we are on.
+        _waveIndex = Mathf.Max(0, waveIndex);
     }
 }

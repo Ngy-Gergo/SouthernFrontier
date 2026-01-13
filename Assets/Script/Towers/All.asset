@@ -20,24 +20,24 @@ MonoBehaviour:
     - type: 1
       amount: 10
     visualPrefab: {fileID: 919132149155446097, guid: 2a835daf8601ec34eac1286be29f2843, type: 3}
-  - defense: 10
+  - defense: 15
     upgradeCost:
     - type: 2
       amount: 10
     - type: 1
       amount: 5
     visualPrefab: {fileID: 919132149155446097, guid: 34f75134786a236409f7193f9dc90ed6, type: 3}
-  - defense: 10
+  - defense: 30
     upgradeCost:
     - type: 2
-      amount: 10
+      amount: 15
     - type: 1
       amount: 5
     visualPrefab: {fileID: 919132149155446097, guid: 3f3e965e5a773e742b52f936822a537d, type: 3}
-  - defense: 10
+  - defense: 70
     upgradeCost:
     - type: 2
-      amount: 10
+      amount: 20
     - type: 1
-      amount: 5
+      amount: 20
     visualPrefab: {fileID: 919132149155446097, guid: ec25eb42e50df874881a93861f2cd63c, type: 3}

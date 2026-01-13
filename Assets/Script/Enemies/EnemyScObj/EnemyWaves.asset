@@ -27,8 +27,36 @@ MonoBehaviour:
       amount: 10
     - type: 6
       amount: 5
-  - arriveTurn: 5
-    enemySize: 30
+  - arriveTurn: 10
+    enemySize: 50
+    strengthPerEnemy: 1
+    loot:
+    - type: 0
+      amount: 25
+    - type: 7
+      amount: 20
+    - type: 8
+      amount: 10
+    - type: 5
+      amount: 20
+    - type: 6
+      amount: 8
+  - arriveTurn: 25
+    enemySize: 70
+    strengthPerEnemy: 1
+    loot:
+    - type: 0
+      amount: 60
+    - type: 7
+      amount: 30
+    - type: 8
+      amount: 15
+    - type: 5
+      amount: 30
+    - type: 6
+      amount: 40
+  - arriveTurn: 30
+    enemySize: 100
     strengthPerEnemy: 1
     loot:
     - type: 0
@@ -41,8 +69,8 @@ MonoBehaviour:
       amount: 10
     - type: 6
       amount: 5
-  - arriveTurn: 5
-    enemySize: 30
+  - arriveTurn: 45
+    enemySize: 200
     strengthPerEnemy: 1
     loot:
     - type: 0
@@ -55,8 +83,8 @@ MonoBehaviour:
       amount: 10
     - type: 6
       amount: 5
-  - arriveTurn: 5
-    enemySize: 30
+  - arriveTurn: 50
+    enemySize: 300
     strengthPerEnemy: 1
     loot:
     - type: 0
@@ -69,8 +97,8 @@ MonoBehaviour:
       amount: 10
     - type: 6
       amount: 5
-  - arriveTurn: 5
-    enemySize: 30
+  - arriveTurn: 75
+    enemySize: 600
     strengthPerEnemy: 1
     loot:
     - type: 0
@@ -83,36 +111,8 @@ MonoBehaviour:
       amount: 10
     - type: 6
       amount: 5
-  - arriveTurn: 5
-    enemySize: 30
-    strengthPerEnemy: 1
-    loot:
-    - type: 0
-      amount: 15
-    - type: 7
-      amount: 10
-    - type: 8
-      amount: 5
-    - type: 5
-      amount: 10
-    - type: 6
-      amount: 5
-  - arriveTurn: 5
-    enemySize: 30
-    strengthPerEnemy: 1
-    loot:
-    - type: 0
-      amount: 15
-    - type: 7
-      amount: 10
-    - type: 8
-      amount: 5
-    - type: 5
-      amount: 10
-    - type: 6
-      amount: 5
-  - arriveTurn: 5
-    enemySize: 30
+  - arriveTurn: 100
+    enemySize: 3000
     strengthPerEnemy: 1
     loot:
     - type: 0
