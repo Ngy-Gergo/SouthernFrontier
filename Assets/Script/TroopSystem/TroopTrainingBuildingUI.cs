@@ -1,26 +1,25 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TroopTrainingBuildingUI : MonoBehaviour
 {
-    [SerializeField] private GameObject panelRoot; // Whole panel to show/hide
-    [SerializeField] private Image buildingIcon;   // Header icon
-    [SerializeField] private TMP_Text buildingName; // Header name
+    [SerializeField] private GameObject panelRoot;   // Whole panel to show/hide
+    [SerializeField] private Image buildingIcon;     // Header icon
+    [SerializeField] private TMP_Text buildingName;  // Header name
 
-    [SerializeField] private Transform rowsParent;      // Where rows get spawned
-    [SerializeField] private TroopTrainRowUI rowPrefab; // Row template
+    [Header("Single troop row")]
+    [SerializeField] private TroopTrainRowUI row;    // One static row in the UI
 
-    [SerializeField] private Button closeButton; // Close panel button
+    [SerializeField] private Button closeButton;     // Close panel button
 
-    private TroopTrainingBuilding _building; // Currently selected troop building
-    private readonly List<TroopTrainRowUI> _rows = new List<TroopTrainRowUI>(); // Spawned rows
+    private TroopTrainingBuilding _building;         // Currently selected troop building
+    private TroopDefinition _troop;                  // The only troop this building can train
 
     private void Awake()
     {
         // Wire close once.
-        closeButton.onClick.AddListener(Hide);
+        if (closeButton != null) closeButton.onClick.AddListener(Hide);
         Hide();
     }
 
@@ -47,49 +46,32 @@ public class TroopTrainingBuildingUI : MonoBehaviour
         if (buildingName != null) buildingName.text = def != null ? def.displayName : "Troops";
         if (buildingIcon != null) buildingIcon.sprite = def != null ? def.icon : null;
 
-        RebuildRows();
+        // One troop per building: use the first entry in the list.
+        _troop = (def != null && def.trainableTroops != null && def.trainableTroops.Count > 0)
+            ? def.trainableTroops[0]
+            : null;
+
+        // Bind the single row once.
+        if (row != null && _building != null && _troop != null)
+            row.Bind(_building, _troop);
+
         Refresh();
     }
 
     public void Hide()
     {
-        // Close panel and clean up rows.
+        // Close and forget the selection.
         if (panelRoot != null) panelRoot.SetActive(false);
         _building = null;
-        ClearRows();
-    }
-
-    private void RebuildRows()
-    {
-        // Recreate rows from the building definition.
-        ClearRows();
-        if (_building == null || _building.Definition == null) return;
-
-        var troops = _building.Definition.trainableTroops;
-        for (int i = 0; i < troops.Count; i++)
-        {
-            var t = troops[i];
-            if (t == null) continue;
-
-            var row = Instantiate(rowPrefab, rowsParent);
-            row.Bind(_building, t);
-            _rows.Add(row);
-        }
+        _troop = null;
     }
 
     private void Refresh()
     {
-        // Let every row update its count + button state.
-        for (int i = 0; i < _rows.Count; i++)
-            _rows[i].Refresh();
-    }
+        // Update the single row.
+        if (row != null) row.Refresh();
 
-    private void ClearRows()
-    {
-        // Destroy previously spawned rows.
-        for (int i = 0; i < _rows.Count; i++)
-            if (_rows[i] != null) Destroy(_rows[i].gameObject);
-
-        _rows.Clear();
+        // Optional: auto-close if config is missing.
+        // if (_building == null || _troop == null) Hide();
     }
 }

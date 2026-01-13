@@ -15,10 +15,10 @@ MonoBehaviour:
   displayName: Archer
   type: 0
   icon: {fileID: 21300000, guid: aa8167114b7164341bc5168cc937efe5, type: 3}
-  defense: 2
+  defense: 5
   trainCost:
   - type: 0
-    amount: 5
+    amount: 2
   - type: 7
     amount: 1
   - type: 8

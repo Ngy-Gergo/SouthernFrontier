@@ -13,6 +13,7 @@ public class BuildingPanelUI : MonoBehaviour
     [SerializeField] private TMP_Text descText;        // Building description
     [SerializeField] private TMP_Text levelText;       // Current level
     [SerializeField] private TMP_Text productionText;  // Output summary
+    [SerializeField] private Toggle productionToggle; // Turn building on/off
 
     [Header("Controls")]
     [SerializeField] private TMP_Dropdown outputDropdown; // Pick what this building produces
@@ -27,9 +28,16 @@ public class BuildingPanelUI : MonoBehaviour
         closeButton.onClick.AddListener(Hide);
         levelUpButton.onClick.AddListener(OnLevelUp);
         outputDropdown.onValueChanged.AddListener(OnOutputChanged);
-
+        productionToggle.onValueChanged.AddListener(OnProductionToggleChanged);
         // Hide the visuals at start (keeps this component alive for first click).
         if (panelRoot != null) panelRoot.SetActive(false);
+    }
+    private void OnProductionToggleChanged(bool on)
+    {
+        // Switch building production then refresh.
+        if (_b == null) return;
+        _b.SetProductionEnabled(on);
+        Refresh();
     }
 
     public void Hide()
@@ -44,6 +52,7 @@ public class BuildingPanelUI : MonoBehaviour
         // Open panel for the clicked building.
         _b = b;
         if (panelRoot != null) panelRoot.SetActive(true);
+        if (productionToggle != null) productionToggle.isOn = _b.ProductionEnabled;
 
         RebuildDropdown();
         Refresh();

@@ -16,6 +16,7 @@ public class BuildingOnClick : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (UIBlock.PointerIsOverUI()) return;
         // Safety: panel might not exist at Awake (scene load order).
         if (panel == null) panel = FindObjectOfType<BuildingPanelUI>(true);
 

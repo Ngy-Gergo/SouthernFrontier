@@ -13,6 +13,7 @@ public class TroopBuildingClickOpenUI : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (UIBlock.PointerIsOverUI()) return;
         // Open the troop panel for this building.
         if (panel != null && _b != null)
             panel.Show(_b);

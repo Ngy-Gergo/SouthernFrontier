@@ -11,6 +11,9 @@ public class Building : MonoBehaviour
     [SerializeField] private int selectedOptionIndex = 0;     // Which production option is active
 
     [SerializeField] private string id;                       // Stable id for save/load
+    [SerializeField] private bool productionEnabled = true; // Turn building on/off
+    public bool ProductionEnabled => productionEnabled;
+    public void SetProductionEnabled(bool enabled) => productionEnabled = enabled;
 
     private GameObject _currentVisual;                        // Spawned model for the current level
 
@@ -60,6 +63,9 @@ public class Building : MonoBehaviour
 
     private void OnTurn()
     {
+        // If the player turned this building off, it produces nothing and consumes nothing.
+        if (!productionEnabled) return;
+
         // Add resources to the stockpile when a turn ends.
         var opt = GetSelectedOption();
         if (opt == null) return;
@@ -67,6 +73,7 @@ public class Building : MonoBehaviour
         int amount = opt.basePerTurn + (opt.perLevel * level);
         Stockpile.Instance?.Produce(opt.output, amount, recipesDb);
     }
+
 
     public bool CanLevelUp()
     {
